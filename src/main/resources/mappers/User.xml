@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springbatch.users.entity.User">
+    <select id="getUser" resultType="com.example.springbatch.users.entity.User"><![CDATA[
+        SELECT id, firstname, lastname, email, email2, profession FROM
+                (SELECT *, (ROW_NUMBER() OVER()) AS ROWNUM FROM user_in ui) AS ROW
+        WHERE ROWNUM > (#{_page}*#{_pagesize}) AND ROWNUM <= (#{_page}+1)*#{_pagesize}
+    ]]></select>
+</mapper>
