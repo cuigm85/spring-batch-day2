@@ -1,1 +1,19 @@
+spring:
+  profiles:
+    active: postgres
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      names: ${job.name:NONE}
+
+---
+spring:
+  profiles: postgres
+  datasource:
+    hikari:
+      jdbc-url: jdbc:postgresql://localhost:15432/db1
+      username: user1
+      password: password1
+      driver-class-name: org.postgresql.Driver
 
